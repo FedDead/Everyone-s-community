@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bensound-goinghigher.mp3-fe5a3f42a12bf3c09b65d44b84e30cd3.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Nivel 1/bensound-goinghigher.mp3"
+dest_files=[ "res://.import/bensound-goinghigher.mp3-fe5a3f42a12bf3c09b65d44b84e30cd3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

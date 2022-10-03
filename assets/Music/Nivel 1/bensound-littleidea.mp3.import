@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bensound-littleidea.mp3-f1149b9705c32a4c824f886ed920af15.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/Nivel 1/bensound-littleidea.mp3"
+dest_files=[ "res://.import/bensound-littleidea.mp3-f1149b9705c32a4c824f886ed920af15.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

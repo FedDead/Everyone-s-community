@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Images/Policia/Amigo/AmigoSprite.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/PoliciaAmigo.gd" type="Script" id=2]
+[ext_resource path="res://assets/Music/Nivel 1/Muerte.mp3" type="AudioStream" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 15.0
+height = 46.0
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 15.0
+height = 42.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Nomove"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.7, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+
+[node name="PoliciaAmigo" type="Node2D"]
+position = Vector2( 391, 359 )
+
+[node name="PoliciaAmigo2" type="KinematicBody2D" parent="."]
+position = Vector2( 2, -2 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="AreaAmigo" type="Area2D" parent="PoliciaAmigo2"]
+collision_layer = 23
+collision_mask = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PoliciaAmigo2/AreaAmigo"]
+position = Vector2( -2, -2 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PoliciaAmigo2"]
+position = Vector2( -2, -3 )
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="PoliciaAmigo2"]
+position = Vector2( -2, -2 )
+texture = ExtResource( 1 )
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PoliciaAmigo2"]
+root_node = NodePath("../CollisionShape2D")
+anims/Idle = SubResource( 2 )
+anims/Nomove = SubResource( 6 )
+anims/RESET = SubResource( 3 )
+anims/Walk = SubResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PoliciaAmigo2"]
+stream = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="PoliciaAmigo2"]
+process_mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="PoliciaAmigo2"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = 135
+limit_top = 280
+limit_right = 650
+limit_bottom = 10
+
+[connection signal="area_entered" from="PoliciaAmigo2/AreaAmigo" to="PoliciaAmigo2" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="PoliciaAmigo2/AreaAmigo" to="PoliciaAmigo2" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="PoliciaAmigo2/Timer" to="PoliciaAmigo2" method="_on_Timer_timeout"]

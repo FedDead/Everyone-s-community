@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/Images/Accesorio/Lupa/LupaSprite.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Lupa2D.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 13.0
+height = 30.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Lupa"
+loop = true
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.391288, 0.886285 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[node name="Lupa" type="Node2D"]
+position = Vector2( 522, 300 )
+
+[node name="Lupa2D" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lupa2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Lupa2D"]
+scale = Vector2( 0.5125, 0.5575 )
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lupa2D"]
+autoplay = "Lupa"
+anims/Lupa = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="body_entered" from="Lupa2D" to="Lupa2D" method="_on_Lupa2D_body_entered"]

@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/Fonts/GaramondPremrPro-Smbd.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/DialogoBoxCasaOne.gd" type="Script" id=2]
+[ext_resource path="res://assets/Images/Dialogos/dialog-background.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/Dialogos/next-indicator.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/Dialogos/boy.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/Dialogos/mother.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/Background/CasaOne.PNG" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 31
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+
+[node name="DialogoBoxCasaOne" type="Control" parent="."]
+anchor_left = 0.496
+anchor_top = 1.0
+anchor_right = 0.496
+anchor_bottom = 1.0
+margin_left = -386.904
+margin_top = -274.0
+margin_right = 386.096
+margin_bottom = -81.0
+script = ExtResource( 2 )
+
+[node name="CasaOne" type="Sprite" parent="DialogoBoxCasaOne"]
+position = Vector2( 383.5, -27.875 )
+scale = Vector2( 2.27093, 1.78835 )
+texture = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="DialogoBoxCasaOne"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogoBoxCasaOne"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 15.0
+margin_right = -17.0
+margin_bottom = -11.0
+custom_colors/default_color = Color( 0.501961, 0.333333, 0.333333, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Texto de ejemplo.
+
+"
+text = "Texto de ejemplo.
+
+"
+
+[node name="Tween" type="Tween" parent="DialogoBoxCasaOne"]
+
+[node name="Mother" type="Sprite" parent="DialogoBoxCasaOne"]
+position = Vector2( 147, -101 )
+scale = Vector2( 0.808594, 0.816406 )
+texture = ExtResource( 6 )
+
+[node name="Boy" type="Sprite" parent="DialogoBoxCasaOne"]
+position = Vector2( 642, -81 )
+scale = Vector2( 0.646599, 0.650429 )
+texture = ExtResource( 5 )
+
+[node name="Continue" type="Sprite" parent="DialogoBoxCasaOne"]
+visible = false
+position = Vector2( 700.75, 140.25 )
+scale = Vector2( 0.558824, 0.519608 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogoBoxCasaOne/Continue"]
+
+[connection signal="tween_completed" from="DialogoBoxCasaOne/Tween" to="DialogoBoxCasaOne" method="_on_Tween_tween_completed"]
